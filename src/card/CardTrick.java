@@ -9,8 +9,8 @@ import java.util.Scanner;
 /**
  * CardTrick class models a hand of cards.
  * 
- * @author Your Name
- * @studentNumber Your Student Number
+ * Garima Verma
+ * 991807497
  */
 public class CardTrick {
     public static void main(String[] args) {
