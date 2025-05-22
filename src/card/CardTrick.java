@@ -24,6 +24,10 @@ public class CardTrick {
             System.out.println(suits[random.nextInt(4)] + " " + hand[i]);
         }
 
+        Card luckyCard = new Card();
+        luckyCard.setValue(7); 
+        luckyCard.setSuit("Hearts"); 
+
         // User input for card selection
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a card value (1-13): ");
