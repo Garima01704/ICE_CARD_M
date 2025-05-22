@@ -16,28 +16,46 @@ import java.util.Scanner;
 public class CardTrick {
 
     public static void main(String[] args) {
+        Card[] magicHand = new Card[7];
+        String[] suits = {"Hearts", "Diamonds", "Spades", "Clubs"};
+
+        Random rand = new Random();
+
+        for (int i = 0; i < magicHand.length; i++) {
+            Card c = new Card();
+            c.setValue(rand.nextInt(13) + 1); 
+            c.setSuit(suits[rand.nextInt(4)]); 
+            magicHand[i] = c;
+        }
+
         
-        Scanner input = new Scanner(System.in);
-System.out.print("Enter card value (1 to 13): ");
-int userValue = input.nextInt();
+        Card luckyCard = new Card();
+        luckyCard.setValue(7); 
+        luckyCard.setSuit("Hearts"); 
 
-System.out.print("Enter card suit (Hearts, Diamonds, Spades, Clubs): ");
-String userSuit = input.next();
+        
+        System.out.println("Magic Hand:");
+        for (Card card : magicHand) {
+            System.out.println(card.getValue() + " of " + card.getSuit());
+        }
 
-boolean found = false;
-for (Card card : magicHand) {
-    if (card.getValue() == userValue && card.getSuit().equalsIgnoreCase(userSuit)) {
-        found = true;
-        break;
-    }
-}
+        
+        boolean found = false;
+        for (Card card : magicHand) {
+            if (card.getValue() == luckyCard.getValue() &&
+                card.getSuit().equalsIgnoreCase(luckyCard.getSuit())) {
+                found = true;
+                break;
+            }
+        }
 
-if (found) {
-    System.out.println("Card found! You win!");
-} else {
-    System.out.println("Sorry, your card was not in the magic hand.");
-}
-
+        
+        System.out.println("\nLucky Card: " + luckyCard.getValue() + " of " + luckyCard.getSuit());
+        if (found) {
+            System.out.println("Congratulations! The lucky card is in the magic hand. You win!");
+        } else {
+            System.out.println("Sorry! The lucky card was not found in the magic hand.");
+        }
     }
 }
 
