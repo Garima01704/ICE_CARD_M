@@ -12,45 +12,51 @@ import java.util.Scanner;
  * Garima Verma
  *Student number:- 991807497
  */
-public class CardTrick {
-    public static void main(String[] args) {
-        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        int[] hand = new int[7];
-        Random random = new Random();
 
-        // Fill the hand with random cards
-        for (int i = 0; i < hand.length; i++) {
-            hand[i] = random.nextInt(13) + 1; // Card values from 1 to 13
-            System.out.println(suits[random.nextInt(4)] + " " + hand[i]);
+public class CardTrick {
+
+    public static void main(String[] args) {
+        
+        Card[] magicHand = new Card[7];
+        String[] suits = {"Hearts", "Diamonds", "Spades", "Clubs"};
+
+        Random rand = new Random();
+
+        for (int i = 0; i < magicHand.length; i++) {
+            Card c = new Card();
+            c.setValue(rand.nextInt(13) + 1); 
+            c.setSuit(suits[rand.nextInt(4)]); 
+            magicHand[i] = c;
         }
 
+        
         Card luckyCard = new Card();
         luckyCard.setValue(7); 
         luckyCard.setSuit("Hearts"); 
 
-        // User input for card selection
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a card value (1-13): ");
-        int userCardValue = scanner.nextInt();
-        System.out.print("Enter a suit (0-3 where 0=Hearts, 1=Diamonds, 2=Clubs, 3=Spades): ");
-        int userCardSuit = scanner.nextInt();
+        
+        System.out.println("Magic Hand:");
+        for (Card card : magicHand) {
+            System.out.println(card.getValue() + " of " + card.getSuit());
+        }
 
-        // Check if the user's card is in the hand
+        
         boolean found = false;
-        for (int card : hand) {
-            if (card == userCardValue) {
+        for (Card card : magicHand) {
+            if (card.getValue() == luckyCard.getValue() &&
+                card.getSuit().equalsIgnoreCase(luckyCard.getSuit())) {
                 found = true;
                 break;
             }
         }
 
+        
+        System.out.println("\nLucky Card: " + luckyCard.getValue() + " of " + luckyCard.getSuit());
         if (found) {
-            System.out.println("Congratulations! Your card is in the magic hand.");
+            System.out.println("Congratulations! The lucky card is in the magic hand. You win!");
         } else {
-            System.out.println("Sorry, your card is not in the magic hand.");
+            System.out.println("Sorry! The lucky card was not found in the magic hand.");
         }
-
-        scanner.close();
     }
 }
 
